@@ -9,6 +9,7 @@ Flask-SQLAlchemy
 alembic==1.13.1
 black
 email-validator
+gdown==5.2.0
 gradio==5.35.0
 gradio_client==1.10.4
 gunicorn
