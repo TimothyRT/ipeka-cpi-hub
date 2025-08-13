@@ -5,7 +5,46 @@ Landing Page
 {% endblock title %}
 
 {% block layer_base %}
-<img class="magolor" alt="He knows what you did last summer :3" onclick="punch_magolor();" src="/images/media/Magolor.png">
+<section class="info">
+  <h2 class="info__subheading">{{ type }} | Select category</h2>
+  <ul class="landing">
+    {% if landing_route_kg %}
+    <li class="navbar__item navbar__item-button">
+      <a href="{{ landing_route_kg }}">
+        <img src="/images/icons/button_KG.svg">
+      </a>
+    </li>
+    {% endif %}
+    {% if landing_route_el %}
+    <li class="navbar__item navbar__item-button">
+      <a href="{{ landing_route_el }}">
+        <img src="/images/icons/button_EL.svg">
+      </a>
+    </li>
+    {% endif %}
+    {% if landing_route_jh %}
+    <li class="navbar__item navbar__item-button">
+      <a href="{{ landing_route_jh }}">
+        <img src="/images/icons/button_JH.svg">
+      </a>
+    </li>
+    {% endif %}
+    {% if landing_route_sh %}
+    <li class="navbar__item navbar__item-button">
+      <a href="{{ landing_route_sh }}">
+        <img src="/images/icons/button_SH.svg">
+      </a>
+    </li>
+    {% endif %}
+    {% if landing_route_ro %}
+    <li class="navbar__item navbar__item-button">
+      <a href="{{ landing_route_ro }}">
+        <img src="/images/icons/button_RO.svg">
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</section>
 {% endblock layer_base %}
 
 {% block script %}

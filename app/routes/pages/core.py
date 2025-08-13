@@ -1,5 +1,5 @@
 # Flask modules
-from flask import Blueprint, render_template
+from flask import Blueprint, redirect, render_template, url_for
 
 
 core_bp = Blueprint("core", __name__, url_prefix="/")
@@ -10,7 +10,24 @@ def home_route():
     return render_template("pages/home.html")
 
 
-@core_bp.route("/staff", defaults={"grade": "ro"}, strict_slashes=False)
+@core_bp.route("/staff", strict_slashes=False)
+def staff_route_generic():
+    landing_route_kg = url_for("pages.core.staff_route", grade="kg")
+    landing_route_el = url_for("pages.core.staff_route", grade="el")
+    landing_route_jh = url_for("pages.core.staff_route", grade="jh")
+    landing_route_sh = url_for("pages.core.staff_route", grade="sh")
+    landing_route_ro = url_for("pages.core.staff_route", grade="ro")
+    return render_template(
+        "pages/landing.html",
+        type="Staff/teacher List",
+        landing_route_kg=landing_route_kg,
+        landing_route_el=landing_route_el,
+        landing_route_jh=landing_route_jh,
+        landing_route_sh=landing_route_sh,
+        landing_route_ro=landing_route_ro
+    )
+
+
 @core_bp.route("/staff/<grade>")
 def staff_route(grade: str):
     grade = grade.lower()

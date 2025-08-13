@@ -169,6 +169,19 @@ body {
 }
 
 /* ---------------- */
+/* Landing */
+
+.landing {
+  background-color: white;
+  border-radius: 3rem;
+  padding: 2rem 2rem;
+  list-style-type: none;
+  /* Flex container */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* ---------------- */
 /* Modal */
 
 .modal__box {
