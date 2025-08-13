@@ -575,12 +575,11 @@ main {
 /* Footer */
 
 .footer {
-  background-color: white;
   box-shadow: 0 4px 7px rgb(1, 1, 1, 0.3);
 }
 
 .footer__image {
-  flex-basis: 30%;
+  height: auto;
   max-width: 200px;
 }
 
@@ -626,4 +625,10 @@ main {
 .text-edit__button {
   flex-grow: 0;
   flex-shrink: 0;
+}
+
+@media only screen and (min-width: 600px) {
+  .text-edit {
+    flex-wrap: nowrap;
+  }
 }
