@@ -1,5 +1,7 @@
 .idea
 .env*
+*.csv
+*.xlsx
 !.env.example
 **/__pycache___
 .pytest_cache
@@ -14,7 +16,13 @@
 **/database
 **/*.db
 **/instance
-**/downloaded/*
-!**/downloaded/
-**/processed/*
-!**/processed/
+**/playground
+**/downloaded/**/*.JPG
+**/processed/**/*.png
+**/demo
+
+*.pt
+
+button_*.png
+google_boy.svg
+Revali.jpg

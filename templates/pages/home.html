@@ -4,14 +4,53 @@
 Home
 {% endblock title %}
 
-{% block content %}
-{% if current_user.is_authenticated %}
-<h1>Welcome back</h1>
-<p>You are logged in as <span class="text-success">{{ current_user.name }}</span>.</p>
-<a href="{{ url_for('auth.logout') }}">Logout</a>
-{% else %}
-<h1>Hello Flask!!</h1>
-<p>You are not logged in.</p>
-<a href="{{ url_for('auth.login') }}">Login</a>
-{% endif %}
-{% endblock content %}
+{% block layer_top %}
+<section class="modal__box">
+    <div class="modal__text">
+        A total of X photos have been generated!
+    </div>
+    <button class="modal__button modal__button-yes">Visit gallery</button>
+    <button class="modal__button modal__button-no">Close</button>
+</section>
+{% endblock layer_top %}
+
+{% block layer_base %}
+<form class="form-drive">
+    <input type="text" name="inputDriveLink" placeholder="Drive link" value="">
+    <button type="submit">Generate</button>
+</form>
+{% endblock layer_base %}
+
+{% block script %}
+<script>
+    const layerTop = document.querySelector('.body__layer-top');
+    const modalText = document.querySelector('.modal__text');
+    const form = document.querySelector('.form-drive');
+
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    form.addEventListener('submit', event => {
+        event.preventDefault();
+        const driveLink = document.querySelector("[name='inputDriveLink']").value;
+        fetch('{{ url_for("api.core_api.process_images", _external=True) }}', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken
+            },
+            body: JSON.stringify({ link: driveLink, directory: "static/images/downloaded/employees" })
+        })
+            .then(response => response.json())
+            .then(data => {
+            layerTop.style.display = "flex";
+            modalText.innerText = data.message;
+            })
+            .catch(err => console.error("Fetch error:", err));
+    });
+
+    const buttonClose = document.querySelector(".modal__button-no");
+    buttonClose.addEventListener('click', event => {
+        layerTop.style.display = "none";
+    });
+</script>
+{% endblock script %}

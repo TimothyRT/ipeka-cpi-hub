@@ -2,8 +2,8 @@
 from flask import Blueprint, request
 from flask.wrappers import Response
 from flask_limiter import ExemptionScope
-from werkzeug.exceptions import HTTPException
 from flask_limiter.errors import RateLimitExceeded
+from werkzeug.exceptions import HTTPException
 
 # Other modules
 import logging
@@ -14,7 +14,9 @@ from app.utils.api import error_response
 from app.utils.cache import get_cached_response, set_cached_response
 
 # Blueprint modules
+from .core import core_api_bp
 from .tests import tests_bp
+
 
 api_bp = Blueprint("api", __name__, url_prefix="/api")
 limiter.exempt(
@@ -55,4 +57,5 @@ def after_request(response: Response):
     return response
 
 
+api_bp.register_blueprint(core_api_bp)
 api_bp.register_blueprint(tests_bp)

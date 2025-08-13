@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Magolor
+{% endblock title %}
+
+{% block layer_base %}
+<img class="magolor" alt="He knows what you did last summer :3" onclick="punch_magolor();" src="/images/media/Magolor.png">
+{% endblock layer_base %}
+
+{% block script %}
+<script>
+  const magolor = document.querySelector(".magolor");
+  const magolorVoicebox = new Audio('audio/magolor.ogg');
+  const punch_magolor = () => {
+    magolorVoicebox.play();
+  }
+</script>
+{% endblock script %}

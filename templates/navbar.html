@@ -1,0 +1,126 @@
+<nav class="body__layer navbar">
+    <ul class="navbar__container navbar__container-main">
+        <li class="navbar__item navbar__item-logo">
+            IPEKA CPI | Parent's Hub
+        </li>
+        {% if navbar_route_kg %}
+        <li class="navbar__item navbar__item-button">
+            <a href="{{ navbar_route_kg }}">
+                <img src="/images/icons/button_KG.svg">
+            </a>
+        </li>
+        {% endif %}
+        {% if navbar_route_el %}
+        <li class="navbar__item navbar__item-button">
+            <a href="{{ navbar_route_el }}">
+                <img src="/images/icons/button_EL.svg">
+            </a>
+        </li>
+        {% endif %}
+        {% if navbar_route_jh %}
+        <li class="navbar__item navbar__item-button">
+            <a href="{{ navbar_route_jh }}">
+                <img src="/images/icons/button_JH.svg">
+            </a>
+        </li>
+        {% endif %}
+        {% if navbar_route_sh %}
+        <li class="navbar__item navbar__item-button">
+            <a href="{{ navbar_route_sh }}">
+                <img src="/images/icons/button_SH.svg">
+            </a>
+        </li>
+        {% endif %}
+        {% if navbar_route_ro %}
+        <li class="navbar__item navbar__item-button">
+            <a href="{{ navbar_route_ro }}">
+                <img src="/images/icons/button_RO.svg">
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+    
+    <ul class="navbar__container navbar__container-mobile">
+        {% if navbar_route_kg %}
+        <li class="navbar__item navbar__item-button">
+            <a href="{{ navbar_route_kg }}">
+                <img src="/images/icons/button_KG.svg">
+            </a>
+        </li>
+        {% endif %}
+        {% if navbar_route_el %}
+        <li class="navbar__item navbar__item-button">
+            <a href="{{ navbar_route_el }}">
+                <img src="/images/icons/button_EL.svg">
+            </a>
+        </li>
+        {% endif %}
+        {% if navbar_route_jh %}
+        <li class="navbar__item navbar__item-button">
+            <a href="{{ navbar_route_jh }}">
+                <img src="/images/icons/button_JH.svg">
+            </a>
+        </li>
+        {% endif %}
+        {% if navbar_route_sh %}
+        <li class="navbar__item navbar__item-button">
+            <a href="{{ navbar_route_sh }}">
+                <img src="/images/icons/button_SH.svg">
+            </a>
+        </li>
+        {% endif %}
+        {% if navbar_route_ro %}
+        <li class="navbar__item navbar__item-button">
+            <a href="{{ navbar_route_ro }}">
+                <img src="/images/icons/button_RO.svg">
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+<script>
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+        var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        console.log(currentScroll)
+        if (currentScroll > 100) {
+            // Scrolling down, hide element
+            navbar.classList.add('hidden-element');
+            navbar.classList.remove('visible-element');
+        } else {
+            // Scrolling up, show element
+            navbar.classList.add('visible-element');
+            navbar.classList.remove('hidden-element');
+        }
+    });
+
+    // const navbar = document.querySelector('.navbar');
+    // var scrollTimeOut;
+    // var lastScrollTop = 0;
+
+    // window.addEventListener('scroll', () => {
+    //     var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    //     if (currentScroll > lastScrollTop) {
+    //         // Scrolling down, hide element
+    //         navbar.classList.add('hidden-element');
+    //         navbar.classList.remove('visible-element');
+    //     } else {
+    //         // Scrolling up, show element
+    //         navbar.classList.add('visible-element');
+    //         navbar.classList.remove('hidden-element');
+
+    //         // Reset the timer on every scroll
+    //         clearTimeout(scrollTimeOut);
+
+    //         // Start a new X-second timer
+    //         scrollTimeout = setTimeout(() => {
+    //             if (window.pageYOffset !== 0) {
+    //                 navbar.classList.add('hidden-element');
+    //                 navbar.classList.remove('visible-element');
+    //             }
+    //         }, 10000);
+    //     }
+    //     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+    // });
+</script>

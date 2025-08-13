@@ -1,0 +1,10 @@
+<footer class="info footer">
+  <img class="footer__image" src="/images/media/IPEKA CPI.png" loading="lazy">
+  <p class="footer__text"> | © IPEKA CPI, All rights reserved</p>
+</footer>
+
+<script>
+  const footerText = document.querySelector(".footer__text");
+  const currentYear = new Date().getFullYear();
+  footerText.textContent = currentYear + footerText.textContent;
+</script>

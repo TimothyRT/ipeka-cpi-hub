@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% set navbar_route_kg = url_for('pages.core.staff_route', grade="kg") %}
+{% set navbar_route_el = url_for('pages.core.staff_route', grade="el") %}
+{% set navbar_route_jh = url_for('pages.core.staff_route', grade="jh") %}
+{% set navbar_route_sh = url_for('pages.core.staff_route', grade="sh") %}
+{% set navbar_route_ro = url_for('pages.core.staff_route', grade="ro") %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block layer_base %}
+<section class="hero">
+  <div class="hero__background"></div>
+  <div class="hero__text">
+    <h1>PARENT'S HUB</h1>
+    <div class="hero__divider"></div>
+    <h2>IPEKA CPI</h2>
+  </div>
+</section>
+
+<section class="info">
+  {% include "back_home.html" %}
+  <h2 class="info__heading">{{ grade_ext }} List</h2>
+  <section class="staff">
+    <div class="staff__entry">
+      <img class="staff__image" src="/images/processed/employees/ANDREW SUMENDAP.png" loading="lazy">
+      <h3 class="staff__name">Andrew Sumendap</h3>
+      <h4 class="staff__position">Teacher</h4>
+    </div>
+    <div class="staff__entry">
+      <img class="staff__image" src="/images/processed/employees/GRACE ANSELA TARUK LOBO.png" loading="lazy">
+      <h3 class="staff__name">Grace Ansela Taruk Lobo</h3>
+      <h4 class="staff__position">Teacher</h4>
+    </div>
+  </section>
+</section>
+{% endblock layer_base %}
+
+{% block script %}
+<script>
+  const staff = document.querySelector(".staff");
+
+  const fetchStaff = () => {
+    staff.innerHTML = "";
+    fetch("{{ url_for('api.core_api.get_staff', grade=grade) }}")
+      .then(response => response.json())
+      .then(data => {
+        console.log("uwu");
+        for (var i = 0; i < data.length; i++) {
+          const entry = document.createElement("div");
+          entry.classList.add("staff__entry");
+
+          const _image = document.createElement("img");
+          _image.classList.add("staff__image");
+          _image.src = "/images/processed/employees/" + data[i].name + ".png";
+          _image.loading = "lazy";
+          entry.appendChild(_image);
+
+          const _name = document.createElement("h3");
+          _name.classList.add("staff__name");
+          _name.textContent = data[i].name;
+          entry.appendChild(_name);
+
+          const _position = document.createElement("h4");
+          _position.classList.add("staff__position");
+          _position.textContent = data[i].position;
+          entry.appendChild(_position);
+
+          staff.appendChild(entry);
+        }
+      })
+      .catch(error => console.log(error));
+  }
+
+  fetchStaff();
+</script>
+{% endblock script %}
