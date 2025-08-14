@@ -4,6 +4,8 @@ from openpyxl.cell.cell import Cell
 from sqlalchemy import create_engine, text
 
 from datetime import datetime
+import os
+import shutil
 
 from utilities.database_uri import get_database_uri
 from utilities.downloader import download_employee_gsheet
@@ -44,6 +46,16 @@ def formatify(inp: (str | int | datetime | None)):
             raise Exception(str(type(inp)))
         
         
+def generate_placeholder_avatar(name: str) -> None:
+    name_propercase = name.strip().title()
+    name_uppercase = name_propercase.upper()    
+    if not os.path.exists(f"static/images/processed/employees/{name_uppercase}.png"):
+        shutil.copy("static/images/icons/blank_avatar.png", f"static/images/processed/employees/{name_uppercase}.png")
+        print(f"{name_propercase}'s profile pic hasn't been uploaded!")
+    else:
+        print(f"{name_propercase}'s profile pic already exists!")
+
+        
 def append_koorlok(df_dict: dict) -> None:
     for grade in ("KG", "EL", "JH", "SH"):
         df_dict["nip"].append(None)
@@ -55,6 +67,7 @@ def append_koorlok(df_dict: dict) -> None:
         df_dict["phone"].append("")
         df_dict["email"].append("")
         df_dict["name"].append("Vivianti Kristanto Jacob")
+        generate_placeholder_avatar(df_dict["name"][-1])
 
 
 def scrap_employee_xlsx(input_file_path: str, sheet_name: str):
@@ -105,6 +118,7 @@ def scrap_employee_xlsx(input_file_path: str, sheet_name: str):
             df_dict["phone"].append(formatify(headers["Phone"].offset(i, 0).value).strip())
             df_dict["email"].append(formatify(headers["Email"].offset(i, 0).value).strip().lower())
             df_dict["name"].append(formatify(headers["Name"].offset(i, 0).value).strip().title())
+            generate_placeholder_avatar(df_dict["name"][-1])
         else:
             break
         
@@ -134,6 +148,8 @@ def scrap_employee_xlsx(input_file_path: str, sheet_name: str):
         )
     )
     
+    df.reset_index(drop=True, inplace=True)
+    df.index.name = "index"
     df.to_csv("static/gsheet/employee.csv")
         
     print('scrap_employee_xlsx() SUCCESS')
@@ -151,7 +167,7 @@ def setup_employee_database(df: pd.DataFrame):
                 return
 
         # If table hasn't existed, or table has zero rows
-        success_rows = df.to_sql("employee", con=engine, if_exists="append", index=True)
+        success_rows = df.to_sql("employee", con=engine, if_exists="append", index=False)
         if success_rows and success_rows > 0:
             print('setup_employee_database() SUCCESS')
 

@@ -17,7 +17,7 @@ def get_staff(grade: None | str):
     if grade is None:
         rows = Employee.query.all()
     else:
-        rows = Employee.query.filter_by(grade=grade.upper()).order_by(Employee.name).all()
+        rows = Employee.query.filter_by(grade=grade.upper()).all()
     return jsonify([row.to_dict() for row in rows])
 
 
