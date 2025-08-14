@@ -31,6 +31,7 @@ def download_employee_gsheet(link: str, directory: str, file_name: str, file_ext
         pass
     else:
         os.mkdir(directory)
+        pathlib.Path(os.path.join(directory, ".keep")).touch()
     finally:        
         # Parse URL
         _link: list[str] = link.split("/")

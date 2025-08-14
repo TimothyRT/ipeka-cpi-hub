@@ -9,7 +9,7 @@ from utilities.database_uri import get_database_uri
 from utilities.downloader import download_employee_gsheet
 
 
-SPECIAL_POSITIONS = ("ADMINISTRATION", "CHAPLAIN", "COUNSELOR", "FINANCE", "F&P", "ICT", "IT SUPPORT", "KEPALA TU", "LIBRARY", "STORE")
+SPECIAL_POSITIONS = ("ADMINISTRATION", "CHAPLAIN", "COUNSELOR", "FINANCE", "F&P", "ICT", "IT SUPPORT", "KEPALA TU", "LIBRARY", "LOCATION COORDINATOR", "STORE")
 
 
 def format_gender(inp: str):
@@ -18,7 +18,7 @@ def format_gender(inp: str):
 
 def format_position(inp: str):
     inp = inp.strip().upper()
-    if "TEACHER" in inp:
+    if "TEACHER" in inp or "ICT" in inp:
         return "TEACHER"
     if "PRINCIPAL" in inp:
         if "VICE" in inp:
@@ -42,6 +42,19 @@ def formatify(inp: (str | int | datetime | None)):
             return ""
         case _:
             raise Exception(str(type(inp)))
+        
+        
+def append_koorlok(df_dict: dict) -> None:
+    for grade in ("KG", "EL", "JH", "SH"):
+        df_dict["nip"].append(None)
+        df_dict["grade"].append(grade.upper())
+        df_dict["join_date"].append(None)
+        df_dict["position"].append("LOCATION COORDINATOR")
+        df_dict["date_of_birth"].append(None)
+        df_dict["gender"].append("F")
+        df_dict["phone"].append("")
+        df_dict["email"].append("")
+        df_dict["name"].append("Vivianti Kristanto Jacob")
 
 
 def scrap_employee_xlsx(input_file_path: str, sheet_name: str):
@@ -95,7 +108,32 @@ def scrap_employee_xlsx(input_file_path: str, sheet_name: str):
         else:
             break
         
+    append_koorlok(df_dict)
+        
     df = pd.DataFrame(df_dict)
+    
+    order_map_position = {
+        "LOCATION COORDINATOR": 0,
+        "PRINCIPAL": 1,
+        "VICE PRINCIPAL": 2,
+        "TEACHER": 3
+    }
+    order_map_grade = {
+        "KG": 0,
+        "EL": 1,
+        "JH": 2,
+        "SH": 3,
+        "RO": 4
+    }
+    df.sort_values(
+        by=["grade", "position"],
+        inplace=True,
+        key=lambda col: (
+            col.map(order_map_position).fillna(4)  # fill others with a high number
+            if col.name == "position" else col.map(order_map_grade)
+        )
+    )
+    
     df.to_csv("static/gsheet/employee.csv")
         
     print('scrap_employee_xlsx() SUCCESS')
