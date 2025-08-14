@@ -16,7 +16,7 @@ def download_drive_folder(link: str, directory: str):
         output_list = gdown.download_folder(link)
         possible_folder = pathlib.Path(str(output_list[0]))
         while True:
-            if possible_folder.parent.name != "api-employee-photos":
+            if possible_folder.parent.name != "api-employee-photos" or possible_folder.parent.name != "public_html":
                 possible_folder = pathlib.Path(possible_folder.parent)
             else:
                 break

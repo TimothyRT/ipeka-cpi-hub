@@ -1,3 +1,5 @@
+"""Application entrypoint for running the Flask web server."""
+
 from app import create_app
 
 app = create_app(debug=True)
