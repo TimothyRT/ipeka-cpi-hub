@@ -4,6 +4,9 @@ from flask import Flask
 # Other modules
 import os
 
+from utilities.pipeline_drive_data import run_drive_data_pipeline
+from utilities.pipeline_employee_data import run_employee_data_pipeline
+
 
 def create_app(debug: bool = False):
     # Check if debug environment variable was passed
@@ -50,6 +53,8 @@ def create_app(debug: bool = False):
     from app import models
 
     db.create_all()
+    run_employee_data_pipeline()
+    run_drive_data_pipeline()
 
     # Register blueprints or routes
     from app.routes import api_bp, pages_bp, auth_bp

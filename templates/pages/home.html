@@ -6,19 +6,53 @@ Home
 
 {% block layer_top %}
 <section class="modal__box">
-    <div class="modal__text">
-        A total of X photos have been generated!
-    </div>
-    <button class="modal__button modal__button-yes">Visit gallery</button>
-    <button class="modal__button modal__button-no">Close</button>
+  <div class="modal__text">
+    A total of X photos have been generated!
+  </div>
+  <button class="modal__button modal__button-yes">Visit gallery</button>
+  <button class="modal__button modal__button-no">Close</button>
 </section>
 {% endblock layer_top %}
 
 {% block layer_base %}
-<form class="form-drive">
-    <input type="text" name="inputDriveLink" placeholder="Drive link" value="">
-    <button type="submit">Generate</button>
-</form>
+<!-- <form class="form-drive">
+  <input type="text" name="inputDriveLink" placeholder="Drive link" value="">
+  <button type="submit">Generate</button>
+</form> -->
+<section class="hero">
+  <div class="hero__background"></div>
+  <div class="hero__text">
+    <h1>PARENT'S HUB</h1>
+    <div class="hero__divider"></div>
+    <h2>IPEKA CPI</h2>
+  </div>
+</section>
+
+<section class="info">
+  <h2 class="info__heading">Links for Parents</h2>
+  <section class="linkcards">
+    <a href="{{ url_for('pages.core.files_route_generic') }}" class="linkcards__card">
+      <img class="linkcards__image" src="/images/media/Paperwork.avif" loading="lazy">
+      <h3 class="linkcards__caption">Important Files</h3>
+    </a>
+    <a href="{{ url_for('pages.core.academic_calendar_route_generic') }}" class="linkcards__card">
+      <img class="linkcards__image" src="/images/media/Calendar.jpg" loading="lazy">
+      <h3 class="linkcards__caption">Academic Calendar</h3>
+    </a>
+    <a href="{{ url_for('pages.core.term_overview_route_generic') }}" class="linkcards__card">
+      <img class="linkcards__image" src="/images/media/Term_Overview.jpg" loading="lazy">
+      <h3 class="linkcards__caption">Term Overview</h3>
+    </a>
+    <a href="{{ url_for('pages.core.timetable_route_generic') }}" class="linkcards__card">
+      <img class="linkcards__image" src="/images/media/Timetable.jpg" loading="lazy">
+      <h3 class="linkcards__caption">Timetable</h3>
+    </a>
+    <a href="{{ url_for('pages.core.staff_route_generic') }}" class="linkcards__card">
+      <img class="linkcards__image" src="/images/media/Guru.png" loading="lazy">
+      <h3 class="linkcards__caption">Staff/teacher List</h3>
+    </a>
+  </section>
+</section>
 {% endblock layer_base %}
 
 {% block script %}

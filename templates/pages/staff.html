@@ -7,7 +7,7 @@
 {% set navbar_route_ro = url_for('pages.core.staff_route', grade="ro") %}
 
 {% block title %}
-Home
+Staff/teacher
 {% endblock title %}
 
 {% block layer_base %}
@@ -47,7 +47,6 @@ Home
     fetch("{{ url_for('api.core_api.get_staff', grade=grade) }}")
       .then(response => response.json())
       .then(data => {
-        console.log("uwu");
         for (var i = 0; i < data.length; i++) {
           const entry = document.createElement("div");
           entry.classList.add("staff__entry");

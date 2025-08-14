@@ -2,21 +2,70 @@ from flask import Blueprint, jsonify, request
 
 import threading
 
-from app.models import Employee
+from app.extensions import db
+from app.models import Employee, AcademicCalendar, ImportantFiles, StaffList, TermOverview, Timetable
+from app.utils.api import success_response
 from utilities.downloader import download_drive_folder
 
 
 core_api_bp = Blueprint("core_api", __name__, url_prefix="/")
 
 
-@core_api_bp.route("/staff/", defaults={"grade": None}, strict_slashes=False)
-@core_api_bp.route("/staff/<grade>", methods=["GET"])
+@core_api_bp.route("/staff", defaults={"grade": None}, strict_slashes=False)
+@core_api_bp.route("/staff/<grade>", strict_slashes=False)
 def get_staff(grade: None | str):
     if grade is None:
-        staff = Employee.query.all()
+        rows = Employee.query.all()
     else:
-        staff = Employee.query.filter_by(grade=grade.upper())
-    return jsonify([s.to_dict() for s in staff])
+        rows = Employee.query.filter_by(grade=grade.upper()).order_by(Employee.name).all()
+    return jsonify([row.to_dict() for row in rows])
+
+
+@core_api_bp.route("/drive/<cat>", defaults={"grade": None}, strict_slashes=False)
+@core_api_bp.route("/drive/<cat>/<grade>", strict_slashes=False)
+def get_drive_url(cat: None | str, grade: None | str):
+    match cat:
+        case "important-files":
+            cat_class = ImportantFiles
+        case "calendar":
+            cat_class = AcademicCalendar
+        case "term-overview":
+            cat_class = TermOverview
+        case "timetable":
+            cat_class = Timetable
+        case _:
+            cat_class = StaffList
+            
+    if grade is None:
+        rows = cat_class.query.all()
+    else:
+        rows = cat_class.query.filter_by(grade=grade.upper()).all()
+    return jsonify([row.to_dict() for row in rows])
+    
+
+@core_api_bp.route("/drive", methods=["POST"], strict_slashes=False)
+def edit_drive_url():
+    data = request.get_json()
+    print(f"{data = }")
+    cat = data.get('cat').lower()
+    grade = data.get('grade').upper()
+    value = data.get('value')
+
+    match cat:
+        case "important-files":
+            cat_class = ImportantFiles
+        case "calendar":
+            cat_class = AcademicCalendar
+        case "term-overview":
+            cat_class = TermOverview
+        case "timetable":
+            cat_class = Timetable
+        case _:
+            cat_class = StaffList
+    row = cat_class.query.filter_by(grade=grade).one_or_404()
+    row.url = value
+    db.session.commit()
+    return success_response(message="Data successfully updated!")
 
 
 def commit_processing_task(link, directory, delete_old_files=True):    

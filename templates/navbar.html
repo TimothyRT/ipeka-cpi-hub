@@ -83,7 +83,6 @@
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
         var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-        console.log(currentScroll)
         if (currentScroll > 100) {
             // Scrolling down, hide element
             navbar.classList.add('hidden-element');

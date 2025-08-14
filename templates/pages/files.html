@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% set navbar_route_kg = url_for('pages.core.files_route', grade="kg") %}
+{% set navbar_route_el = url_for('pages.core.files_route', grade="el") %}
+{% set navbar_route_jh = url_for('pages.core.files_route', grade="jh") %}
+{% set navbar_route_sh = url_for('pages.core.files_route', grade="sh") %}
+
+{% block title %}
+Important Files
+{% endblock title %}
+
+{% block layer_base %}
+<section class="hero">
+  <div class="hero__background"></div>
+  <div class="hero__text">
+    <h1>PARENT'S HUB</h1>
+    <div class="hero__divider"></div>
+    <h2>IPEKA CPI</h2>
+  </div>
+</section>
+
+<section class="info">
+  {% include "back_home.html" %}
+  <h2 class="info__heading">{{ grade_ext }}</h2>
+  <section class="files">
+    <div class="files__entry">
+      <img class="files__icon" src="/images/icons/document.svg">
+      <div class="files__text">
+        <h3 class="files__title">Jadwal Ujian.pdf</h3>
+        <a href="#"><button class="button button-view" type="button">View</button></a>
+        <a href="#"><button class="button button-download" type="button">Download</button></a>
+        <span class="files__date">• Last updated: 27 Jan 2025</span>
+      </div>
+    </div>
+
+    <div class="files__entry">
+      <img class="files__icon" src="/images/icons/document.svg">
+      <div class="files__text">
+        <h3 class="files__title">Jadwal Ujian.pdf</h3>
+        <a href="#"><button class="button button-view">View</button></a>
+        <a href="#"><button class="button button-download">Download</button></a>
+        <span class="files__date">• Last updated: 27 Jan 2025</span>
+      </div>
+    </div>
+  </section>
+</section>
+{% endblock layer_base %}
+
+{% block script %}
+<script>
+</script>
+{% endblock script %}

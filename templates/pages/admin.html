@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Admin Panel
+{% endblock title %}
+
+{% block layer_base %}
+<section class="hero">
+  <div class="hero__background" style="background-image: url('/images/media/Server.jpg');"></div>
+  <div class="hero__text">
+    <h1>ADMIN PANEL</h1>
+  </div>
+</section>
+
+<section class="info">
+  <h2 class="info__heading">Site Content</h2>
+  <section class="info__subcontainer">
+    <h3 class="info__subheading">I. Important Files</h3>
+    <form class="text-edit">
+      <h4 class="text-edit__title">General:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="files_general" placeholder="Drive folder URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="important-files" data-grade="all" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+    <form class="text-edit">
+      <h4 class="text-edit__title">Kindergarten:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="files_kg" placeholder="Drive folder URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="important-files" data-grade="kg" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+    <form class="text-edit">
+      <h4 class="text-edit__title">Elementary:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="files_el" placeholder="Drive folder URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="important-files" data-grade="el" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+    <form class="text-edit">
+      <h4 class="text-edit__title">Junior High:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="files_jh" placeholder="Drive folder URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="important-files" data-grade="jh" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+    <form class="text-edit">
+      <h4 class="text-edit__title">Senior High:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="files_sh" placeholder="Drive folder URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="important-files" data-grade="sh" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+  </section>
+
+  <section class="info__subcontainer">
+    <h3 class="info__subheading">II. Academic Calendar</h3>
+    <form class="text-edit">
+      <h4 class="text-edit__title">Kindergarten:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="calendar_kg" placeholder="Drive file URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="calendar" data-grade="kg" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+    <form class="text-edit">
+      <h4 class="text-edit__title">Elementary:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="calendar_el" placeholder="Drive file URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="calendar" data-grade="el" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+    <form class="text-edit">
+      <h4 class="text-edit__title">Junior High:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="calendar_jh" placeholder="Drive file URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="calendar" data-grade="jh" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+    <form class="text-edit">
+      <h4 class="text-edit__title">Senior High:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="calendar_sh" placeholder="Drive file URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="calendar" data-grade="sh" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+  </section>
+
+  <section class="info__subcontainer">
+    <h3 class="info__subheading">III. Term Overview</h3>
+    <form class="text-edit">
+      <h4 class="text-edit__title">Kindergarten:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="overview_kg" placeholder="Drive file URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="term-overview" data-grade="kg" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+    <form class="text-edit">
+      <h4 class="text-edit__title">Elementary:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="overview_el" placeholder="Drive file URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="term-overview" data-grade="el" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+    <form class="text-edit">
+      <h4 class="text-edit__title">Junior High:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="overview_jh" placeholder="Drive file URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="term-overview" data-grade="jh" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+    <form class="text-edit">
+      <h4 class="text-edit__title">Senior High:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="overview_sh" placeholder="Drive file URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="term-overview" data-grade="sh" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+  </section>
+
+  <section class="info__subcontainer">
+    <h3 class="info__subheading">IV. Timetable</h3>
+    <form class="text-edit">
+      <h4 class="text-edit__title">Kindergarten:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="timetable_kg" placeholder="Drive file URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="timetable" data-grade="kg" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+    <form class="text-edit">
+      <h4 class="text-edit__title">Elementary:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="timetable_el" placeholder="Drive file URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="timetable" data-grade="el" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+    <form class="text-edit">
+      <h4 class="text-edit__title">Junior High:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="timetable_jh" placeholder="Drive file URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="timetable" data-grade="jh" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+    <form class="text-edit">
+      <h4 class="text-edit__title">Senior High:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="timetable_sh" placeholder="Drive file URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="timetable" data-grade="sh" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+  </section>
+
+  <section class="info__subcontainer">
+    <h3 class="info__subheading">V. Staff List</h3>
+    <form class="text-edit">
+      <h4 class="text-edit__title">All:</h4>
+      <input class="text-edit__input text-edit__input-drive" name="staff_ro" placeholder="Drive folder URL" onload="load(this);" type="text">
+      <button class="button button-save text-edit__button" type="button" data-cat="staff-list" data-grade="all" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
+      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+    </form>
+  </section>
+</section>
+{% endblock layer_base %}
+
+{% block script %}
+<script>
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+  const saveEdit = (cat, grade) => {
+    const { value: inputValue } = event.target.closest('form').querySelector('input');
+    console.log(cat, grade, inputValue);
+    fetch("{{ url_for('api.core_api.edit_drive_url') }}", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken
+      },
+      body: JSON.stringify({
+        cat: cat,
+        grade: grade,
+        value: inputValue
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data)
+      alert("Edit saved!");
+    })
+    .catch(error => console.error('Error:', error));
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const textInputs = document.querySelectorAll(".text-edit__input-drive");
+    textInputs.forEach(input => {
+      const { cat: cat } = input.closest('form').querySelector('button').dataset;
+      const { grade: grade } = input.closest('form').querySelector('button').dataset;
+
+      const endpointUrl = "{{ url_for('api.core_api.get_drive_url', cat='__CAT__', grade='__GRADE__') }}"
+      .replace('__CAT__', encodeURIComponent(cat))
+      .replace('__GRADE__', encodeURIComponent(grade));
+
+      fetch(endpointUrl)
+        .then(response => response.json())
+        .then(data => {
+          input.value = data[0].url;
+        })
+        .catch(err => console.error("Error:", err));
+    })
+  })
+
+</script>
+{% endblock script %}

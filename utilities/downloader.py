@@ -24,7 +24,7 @@ def download_drive_folder(link: str, directory: str):
         shutil.move(folder, directory)
         
         
-def download_gsheet(link: str, directory: str, file_name: str, file_extension: str):
+def download_employee_gsheet(link: str, directory: str, file_name: str, file_extension: str):
     try:
         shutil.rmtree(directory)
     except:

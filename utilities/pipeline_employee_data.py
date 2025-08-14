@@ -1,12 +1,15 @@
 import pandas as pd
 from openpyxl import *
 from openpyxl.cell.cell import Cell
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 
 from datetime import datetime
 
+from utilities.database_uri import get_database_uri
+from utilities.downloader import download_employee_gsheet
 
-SPECIAL_POSITIONS = ["ADMINISTRATION", "CHAPLAIN", "COUNSELOR", "FINANCE", "F&P", "ICT", "IT SUPPORT", "KEPALA TU", "LIBRARY", "STORE"]
+
+SPECIAL_POSITIONS = ("ADMINISTRATION", "CHAPLAIN", "COUNSELOR", "FINANCE", "F&P", "ICT", "IT SUPPORT", "KEPALA TU", "LIBRARY", "STORE")
 
 
 def format_gender(inp: str):
@@ -94,19 +97,40 @@ def scrap_employee_xlsx(input_file_path: str, sheet_name: str):
         
     df = pd.DataFrame(df_dict)
     df.to_csv("static/gsheet/employee.csv")
-            
-    # return df["position"].unique()
+        
+    print('scrap_employee_xlsx() SUCCESS')
     return df
-    
 
-if __name__ == "__main__":
+
+def setup_employee_database(df: pd.DataFrame):
+    engine = create_engine(get_database_uri())
+    with engine.connect() as conn:
+        table_exists = engine.dialect.has_table(conn, "employee")
+        if table_exists:
+            row_count = conn.execute(text("SELECT COUNT(*) FROM employee")).scalar()
+            if row_count > 0:
+                print("Table 'employee' already has data! Aborting.")
+                return
+
+        # If table hasn't existed, or table has zero rows
+        success_rows = df.to_sql("employee", con=engine, if_exists="append", index=True)
+        if success_rows and success_rows > 0:
+            print('setup_employee_database() SUCCESS')
+
+
+def run_employee_data_pipeline() -> None:
+    download_employee_gsheet(
+        link="https://docs.google.com/spreadsheets/d/1EWSXZHYrLl0wyzE4vsFdNru61rrgyN8pNDCwvTgFeo8",
+        directory="static/gsheet",
+        file_name="employee",
+        file_extension="xlsx"
+    )
     df = scrap_employee_xlsx(
         input_file_path="static/gsheet/employee.xlsx",
         sheet_name="Summary",
     )
-    df.to_sql(
-        "employee",
-        con=create_engine('sqlite:///instance/database.db'),
-        if_exists="replace",
-        index=True
-    )
+    setup_employee_database(df)
+
+
+if __name__ == "__main__":
+    run_employee_data_pipeline()
