@@ -18,7 +18,7 @@ def get_staff(grade: None | str):
         rows = Employee.query.all()
     else:
         rows = Employee.query.filter_by(grade=grade.upper()).all()
-    return jsonify([row.to_dict() for row in rows])
+    return jsonify([row.to_dict() | {"engine": str(db.engine)} for row in rows])
 
 
 @core_api_bp.route("/drive/<cat>", defaults={"grade": None}, strict_slashes=False)
