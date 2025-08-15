@@ -50,7 +50,7 @@ def generate_placeholder_avatar(name: str) -> None:
     name_propercase = name.strip().title()
     name_uppercase = name_propercase.upper()    
     if not os.path.exists(f"static/images/processed/employees/{name_uppercase}.png"):
-        shutil.copy("static/images/icons/blank_avatar.png", f"static/images/processed/employees/{name_uppercase}.png")
+        shutil.copy("static/images/icons/blank_avatar.png", f"static/images/processed/employees/{name_uppercase.replace(' ', '_')}.png")
         print(f"{name_propercase}'s profile pic hasn't been uploaded!")
     else:
         print(f"{name_propercase}'s profile pic already exists!")

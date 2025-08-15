@@ -130,7 +130,7 @@ def pipeline(input_directory: str, output_directory: str, verbose=True):
                     0: os.path.join(root, file),
                     1: os.path.join(output_directory, file.replace('.JPG', ' v2.JPG')),
                     2: os.path.join(output_directory, file.replace('.JPG', ' v3.JPG')),
-                    3: os.path.join(output_directory, file.replace('JPG', 'png')),
+                    3: os.path.join(output_directory, file.replace('JPG', 'png').replace(' ', '_')),
                 }
                 
                 if os.path.exists(file_path[3]):
