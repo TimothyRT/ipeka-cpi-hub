@@ -1,6 +1,7 @@
 Flask
 Flask-WTF
 Flask-Cors
+Flask-Dance
 Flask-Login
 Flask-Bcrypt
 Flask-Limiter
