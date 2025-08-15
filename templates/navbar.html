@@ -1,7 +1,7 @@
 <nav class="body__layer navbar">
     <ul class="navbar__container navbar__container-main">
         <li class="navbar__item navbar__item-logo">
-            IPEKA CPI | Parent's Hub
+            <a href="{{ url_for('pages.core.home_route') }}">IPEKA CPI | Parent's Hub</a>
         </li>
         {% if navbar_route_kg %}
         <li class="navbar__item navbar__item-button">
@@ -78,6 +78,12 @@
         {% endif %}
     </ul>
 </nav>
+
+<!-- {% if session['picture'] %}
+<span style="position: sticky; z-index: 10;">
+    <img src="{{ session['picture']['picture'] }}">
+</span>
+{% endif %} -->
 
 <script>
     const navbar = document.querySelector('.navbar');

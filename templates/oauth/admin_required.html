@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Unauthorized Access
+{% endblock title %}
+
+{% block layer_base %}
+<section class="info info-auth">
+    <h2>Sorry, administration rights are required to access this page. You are currently using {{ email }} as your email, which is unauthorized. {{ b1 }} | {{ b2 }} | {{ b3 }}</h2>
+    <a href="{{ url_for('google.login') }}">
+        <button class="button button-google">Switch account</button>
+    </a>
+</section>
+{% endblock layer_base %}
+
+{% block script %}
+<script>
+</script>
+{% endblock script %}

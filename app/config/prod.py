@@ -10,7 +10,15 @@ load_dotenv(ENV_FILE_PATH)
 
 # Flask
 SECRET_KEY = os.environ.get("SECRET_KEY", "YOUR-FALLBACK-SECRET-KEY")
-DATABASE_URI = os.environ.get("DATABASE_URI", "sqlite:///database.db")
+DATABASE_URI = 'mysql+pymysql://{username}:{password}@{host}/{db_name}'.format(
+	username=os.getenv('MYSQL_USER'),
+	password=os.getenv('MYSQL_PASSWORD'),
+	host=os.getenv('MYSQL_HOST'),
+	db_name=os.getenv('MYSQL_NAME')
+)
+# Client
+CLIENT_ID = os.environ.get("CLIENT_ID")
+CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
 # Ratelimit
 RATELIMIT_ENABLED = os.environ.get("RATELIMIT_ENABLED", "False") == "True"
 RATELIMIT_STORAGE_URI = os.environ.get("RATELIMIT_STORAGE_URI", "memory://")
@@ -32,6 +40,9 @@ class ProdConfig:
     SECRET_KEY = os.environ.get("SECRET_KEY", "YOUR-FALLBACK-SECRET-KEY")
     # Database
     SQLALCHEMY_DATABASE_URI = DATABASE_URI
+    # Google OAuth
+    CLIENT_ID = CLIENT_ID
+    CLIENT_SECRET = CLIENT_SECRET
     # Ratelimit
     RATELIMIT_ENABLED = RATELIMIT_ENABLED
     RATELIMIT_STORAGE_URI = RATELIMIT_STORAGE_URI

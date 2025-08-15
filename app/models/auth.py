@@ -2,7 +2,7 @@
 from flask_login import UserMixin
 
 # Other modules
-from datetime import datetime
+from datetime import datetime, timezone
 
 # Local modules
 from app.extensions import db
@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
-    created_date = db.Column(db.DateTime, default=datetime.utcnow)
+    created_date = db.Column(db.DateTime, default=datetime.now(timezone.utc))
 
     def __repr__(self):
         return f"<User {self.name}>"

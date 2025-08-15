@@ -1,18 +1,27 @@
 # Flask modules
-from flask import Blueprint, render_template, url_for
+from flask import Blueprint, render_template, url_for, redirect, session
+from flask_dance.contrib.google import google
 
 from app.models.drive_urls import AcademicCalendar, ImportantFiles, TermOverview, Timetable
+from app.routes.google_oauth import require_oauth
 
 
 core_bp = Blueprint("core", __name__, url_prefix="/")
 
 
+@core_bp.route("/login_user")
+def login_user():
+    return render_template("oauth/login.html")
+
+
 @core_bp.route("/")
+@require_oauth()
 def home_route():
     return render_template("pages/home.html")
 
 
 @core_bp.route("/staff", strict_slashes=False)
+@require_oauth()
 def staff_route_generic():
     landing_route_kg = url_for("pages.core.staff_route", grade="kg")
     landing_route_el = url_for("pages.core.staff_route", grade="el")
@@ -31,6 +40,7 @@ def staff_route_generic():
 
 
 @core_bp.route("/staff/<grade>", strict_slashes=False)
+@require_oauth()
 def staff_route(grade: str):
     grade = grade.lower()
     grade_ext = ""
@@ -44,11 +54,12 @@ def staff_route(grade: str):
         case "sh":
             grade_ext = "Senior High Teacher"
         case _:
-            grade_ext = "Relation Office Staff"
+            grade_ext = "Relations Office Staff"
     return render_template("pages/staff.html", grade=grade, grade_ext=grade_ext)
 
 
 @core_bp.route("/files", strict_slashes=False)
+@require_oauth()
 def files_route_generic():
     # landing_route_kg = url_for("pages.core.files_route", grade="kg")
     # landing_route_el = url_for("pages.core.files_route", grade="el")
@@ -69,6 +80,7 @@ def files_route_generic():
     
 
 @core_bp.route("/files/<grade>", strict_slashes=False)
+@require_oauth()
 def files_route(grade: str):
     grade = grade.lower()
     grade_ext = ""
@@ -85,6 +97,7 @@ def files_route(grade: str):
 
 
 @core_bp.route("/term-overview", strict_slashes=False)
+@require_oauth()
 def term_overview_route_generic():
     landing_route_kg = TermOverview.query.filter_by(grade="KG").one_or_404().url
     landing_route_el = TermOverview.query.filter_by(grade="EL").one_or_404().url
@@ -101,6 +114,7 @@ def term_overview_route_generic():
     
     
 @core_bp.route("/academic-calendar", strict_slashes=False)
+@require_oauth()
 def academic_calendar_route_generic():
     landing_route_kg = AcademicCalendar.query.filter_by(grade="KG").one_or_404().url
     landing_route_el = AcademicCalendar.query.filter_by(grade="EL").one_or_404().url
@@ -117,6 +131,7 @@ def academic_calendar_route_generic():
     
     
 @core_bp.route("/timetable", strict_slashes=False)
+@require_oauth()
 def timetable_route_generic():
     landing_route_kg = Timetable.query.filter_by(grade="KG").one_or_404().url
     landing_route_el = Timetable.query.filter_by(grade="EL").one_or_404().url
@@ -132,16 +147,24 @@ def timetable_route_generic():
     )
 
 
+@core_bp.route("/core-values")
+@require_oauth()
+def core_values_route():
+    return render_template("pages/core_values.html")
+
+
 @core_bp.route("/test", strict_slashes=False)
 def test_route():
     return render_template("pages/test.html")
 
 
 @core_bp.route("/admin", strict_slashes=False)
+@require_oauth(admin_only=True)
 def admin_route():
     return render_template("pages/admin.html")
 
 
 @core_bp.route("/magolor", strict_slashes=False)
+@require_oauth()
 def magolor():
     return render_template("pages/magolor.html")

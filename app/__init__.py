@@ -57,10 +57,11 @@ def create_app(debug: bool = False):
     run_drive_data_pipeline()
 
     # Register blueprints or routes
-    from app.routes import api_bp, pages_bp, auth_bp
+    from app.routes import api_bp, auth_bp, google_bp, pages_bp
 
     app.register_blueprint(api_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(google_bp, url_prefix="/oauth")
     app.register_blueprint(pages_bp)
 
     # Global Ratelimit Checker

@@ -10,6 +10,9 @@ load_dotenv(ENV_FILE_PATH)
 # Flask
 SECRET_KEY = os.environ.get("SECRET_KEY", "YOUR-FALLBACK-SECRET-KEY")
 DATABASE_URI = os.environ.get("DATABASE_URI", "sqlite:///database.db")
+# Client
+CLIENT_ID = os.environ.get("CLIENT_ID")
+CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
 # Ratelimit
 RATELIMIT_ENABLED = os.environ.get("RATELIMIT_ENABLED", "False") == "True"
 RATELIMIT_STORAGE_URI = os.environ.get("RATELIMIT_STORAGE_URI", "memory://")
@@ -32,12 +35,17 @@ class DevConfig:
     SECRET_KEY = SECRET_KEY
     # Database
     SQLALCHEMY_DATABASE_URI = DATABASE_URI
+    # Google OAuth
+    CLIENT_ID = CLIENT_ID
+    CLIENT_SECRET = CLIENT_SECRET
     # Ratelimit
     RATELIMIT_ENABLED = RATELIMIT_ENABLED
     RATELIMIT_STORAGE_URI = RATELIMIT_STORAGE_URI
     RATELIMIT_STRATEGY = "fixed-window"  # or "moving-window"
     RATELIMIT_IN_MEMORY_FALLBACK_ENABLED = True
     RATELIMIT_HEADERS_ENABLED = True
+    # OAuth
+    OAUTHLIB_INSECURE_TRANSPORT = 1
     # Caching
     CACHE_ENABLED = CACHE_ENABLED
     CACHE_TYPE = CACHE_TYPE

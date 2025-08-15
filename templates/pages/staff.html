@@ -53,7 +53,7 @@ Staff/teacher
 
           const _image = document.createElement("img");
           _image.classList.add("staff__image");
-          _image.src = "/images/processed/employees/" + data[i].name.replace(" ", "_") + ".png";
+          _image.src = "/images/processed/employees/" + data[i].name.toUpperCase().replaceAll(" ", "_") + ".png";
           _image.loading = "lazy";
           entry.appendChild(_image);
 

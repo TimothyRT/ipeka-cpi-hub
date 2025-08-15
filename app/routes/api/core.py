@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, current_app, jsonify, request
 
 import threading
 
@@ -18,7 +18,7 @@ def get_staff(grade: None | str):
         rows = Employee.query.all()
     else:
         rows = Employee.query.filter_by(grade=grade.upper()).all()
-    return jsonify([row.to_dict() | {"engine": str(db.engine)} for row in rows])
+    return jsonify([row.to_dict() | {"temuera": "morrison"} for row in rows])
 
 
 @core_api_bp.route("/drive/<cat>", defaults={"grade": None}, strict_slashes=False)
