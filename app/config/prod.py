@@ -32,6 +32,8 @@ CACHE_EXEMPTED_ROUTES = [
 
 
 class ProdConfig:
+    ENV = "PROD"
+    ENV_FILE_PATH = str(ENV_FILE_PATH)
     # Flask
     TESTING = False
     DEBUG = False

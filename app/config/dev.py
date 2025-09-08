@@ -26,6 +26,8 @@ CACHE_EXEMPTED_ROUTES = [
 
 
 class DevConfig:
+    ENV = "DEV"
+    ENV_FILE_PATH = str(ENV_FILE_PATH)
     # Flask
     TESTING = True
     DEBUG = True

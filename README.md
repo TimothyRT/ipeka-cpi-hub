@@ -19,6 +19,7 @@ nginx:
     startup_file: server.py
     python: .pyenv/shims/python
     env_var_list:
+      - FLASK_DEBUG=False
       - PYTHONDONTWRITEBYTECODE=1
 commands:
   - 'cp .env.example .env'
