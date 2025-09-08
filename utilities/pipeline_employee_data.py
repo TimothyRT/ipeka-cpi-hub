@@ -15,6 +15,10 @@ SPECIAL_POSITIONS = ("ADMINISTRATION", "CHAPLAIN", "COUNSELOR", "FINANCE", "F&P"
 
 
 def format_gender(inp: str):
+    if inp is None:
+        return inp
+    if inp[0] is None:
+        return inp[0]
     return inp[0].upper()
 
 
