@@ -1,5 +1,6 @@
 from flask import Blueprint, current_app, jsonify, request
 
+import os
 import threading
 
 from app.extensions import db
@@ -9,6 +10,15 @@ from utilities.downloader import download_drive_folder
 
 
 core_api_bp = Blueprint("core_api", __name__, url_prefix="/")
+
+
+@core_api_bp.route("/temuera", strict_slashes=False)
+def temuera_morrison():
+    return jsonify({
+        "temuera": "morrison",
+        "ENV": current_app.config["ENV"],
+        "FLASK_DEBUG": str(os.environ.get("FLASK_DEBUG"))
+    })
 
 
 @core_api_bp.route("/staff", defaults={"grade": None}, strict_slashes=False)
