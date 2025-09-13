@@ -17,7 +17,8 @@ def temuera_morrison():
     return jsonify({
         "temuera": "morrison",
         "ENV": current_app.config["ENV"],
-        "FLASK_DEBUG": str(os.environ.get("FLASK_DEBUG"))
+        "FLASK_DEBUG": str(os.environ.get("FLASK_DEBUG")),
+        "SECRET_KEY": os.environ.get("SECRET_KEY")
     })
 
 
@@ -28,7 +29,7 @@ def get_staff(grade: None | str):
         rows = Employee.query.all()
     else:
         rows = Employee.query.filter_by(grade=grade.upper()).all()
-    return jsonify([row.to_dict() | {"temuera": "morrison"} for row in rows])
+    return jsonify([row.to_dict() for row in rows])
 
 
 @core_api_bp.route("/drive/<cat>", defaults={"grade": None}, strict_slashes=False)

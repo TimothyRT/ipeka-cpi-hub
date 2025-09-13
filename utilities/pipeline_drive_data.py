@@ -4,8 +4,9 @@ from sqlalchemy import create_engine, text
 from utilities.database_uri import get_database_uri
 
 
-def setup_drive_database():
-    engine = create_engine(get_database_uri())
+def setup_drive_database(app):
+    database_uri = get_database_uri(app)
+    engine = create_engine(database_uri)
 
     for cat in ("academic_calendar", "important_files", "staff_list", "term_overview", "timetable"):
         with engine.connect() as conn:
@@ -30,9 +31,9 @@ def setup_drive_database():
                 print('setup_drive_database() SUCCESS')
 
 
-def run_drive_data_pipeline():
-    setup_drive_database()
+def run_drive_data_pipeline(app):
+    setup_drive_database(app)
 
 
-if __name__ == "__main__":
-    run_drive_data_pipeline()
+# if __name__ == "__main__":
+#     run_drive_data_pipeline(app)  # broken

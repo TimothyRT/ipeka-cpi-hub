@@ -1,4 +1,5 @@
 import pandas as pd
+from flask import Flask
 from openpyxl import *
 from openpyxl.cell.cell import Cell
 from sqlalchemy import create_engine, text
@@ -160,8 +161,10 @@ def scrap_employee_xlsx(input_file_path: str, sheet_name: str):
     return df
 
 
-def setup_employee_database(df: pd.DataFrame):
-    engine = create_engine(get_database_uri())
+def setup_employee_database(app: Flask, df: pd.DataFrame) -> None:
+    database_uri = get_database_uri(app)
+    engine = create_engine(database_uri)
+    
     with engine.connect() as conn:
         table_exists = engine.dialect.has_table(conn, "employee")
         if table_exists:
@@ -176,7 +179,7 @@ def setup_employee_database(df: pd.DataFrame):
             print('setup_employee_database() SUCCESS')
 
 
-def run_employee_data_pipeline() -> None:
+def run_employee_data_pipeline(app: Flask) -> None:
     download_employee_gsheet(
         link="https://docs.google.com/spreadsheets/d/1EWSXZHYrLl0wyzE4vsFdNru61rrgyN8pNDCwvTgFeo8",
         directory="static/gsheet",
@@ -187,8 +190,8 @@ def run_employee_data_pipeline() -> None:
         input_file_path="static/gsheet/employee.xlsx",
         sheet_name="Summary",
     )
-    setup_employee_database(df)
+    setup_employee_database(app, df)
 
 
-if __name__ == "__main__":
-    run_employee_data_pipeline()
+# if __name__ == "__main__":
+#     run_employee_data_pipeline()

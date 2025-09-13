@@ -10,9 +10,9 @@ from utilities.pipeline_employee_data import run_employee_data_pipeline
 
 def create_app(debug: bool = False):
     # Check if debug environment variable was passed
-    FLASK_DEBUG = os.environ.get("FLASK_DEBUG", False)
-    if FLASK_DEBUG:
-        debug = FLASK_DEBUG
+    # FLASK_DEBUG = os.environ.get("FLASK_DEBUG", False)
+    # if FLASK_DEBUG:
+    #     debug = FLASK_DEBUG
 
     # Create the Flask application instance
     app = Flask(
@@ -53,8 +53,8 @@ def create_app(debug: bool = False):
     from app import models
 
     db.create_all()
-    run_employee_data_pipeline()
-    run_drive_data_pipeline()
+    run_employee_data_pipeline(app)
+    run_drive_data_pipeline(app)
 
     # Register blueprints or routes
     from app.routes import api_bp, auth_bp, google_bp, pages_bp

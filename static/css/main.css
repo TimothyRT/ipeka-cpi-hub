@@ -36,14 +36,17 @@ body {
 }
 
 .body__layer-3 {
+  pointer-events: none;
   z-index: 3;
 }
 
 .body__layer-2 {
+  pointer-events: none;
   z-index: 2;
 }
 
 .body__layer-1 {
+  pointer-events: none;
   z-index: 1;
 }
 
@@ -52,6 +55,22 @@ body {
   /* Flex container */
   display: flex;
   flex-direction: column;
+}
+
+.admin-dashboard-icon {
+  height: auto;
+  pointer-events: auto;
+  width: 128px;
+  /* Positioned */
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+}
+
+.admin-dashboard-icon:hover {
+  opacity: 0.7;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transform: scale(1.1, 1.1);
 }
 
 /* ---------------- */

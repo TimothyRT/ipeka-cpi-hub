@@ -6,7 +6,7 @@ Unauthorized Access
 
 {% block layer_base %}
 <section class="info info-auth">
-    <h2>Sorry, administration rights are required to access this page. You are currently using {{ email }} as your email, which is unauthorized. {{ b1 }} | {{ b2 }} | {{ b3 }}</h2>
+    <h2 style="text-align: center;">Sorry, administration rights are required to access this page. You are currently using {{ email }} as your email, which is unauthorized.</h2>
     <a href="{{ url_for('google.login') }}">
         <button class="button button-google">Switch account</button>
     </a>

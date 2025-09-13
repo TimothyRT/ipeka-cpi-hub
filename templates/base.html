@@ -50,12 +50,15 @@
 <div class="body__layer body__layer-2">
   {% block layer_2 %}
   {% endblock layer_2 %}
-</div>
+</div> -->
 
 <div class="body__layer body__layer-1">
+  {% if session.get("is_admin") %}
+    <a class="admin-dashboard-icon" href="{{ url_for('pages.core.admin_route') }}"><img src="images/icons/admin_dashboard.svg"></a>
+  {% endif %}
   {% block layer_1 %}
   {% endblock layer_1 %}
-</div> -->
+</div>
 
 <div class="body__layer body__layer-base">
   <main>

@@ -4,7 +4,7 @@ from app.extensions import db
     
 class AcademicCalendar(db.Model):
     __tablename__ = "academic_calendar"
-    grade = db.Column(db.String, primary_key=True, unique=True, nullable=False)
+    grade = db.Column(db.String(16), primary_key=True, unique=True, nullable=False)
     url = db.Column(db.String(255), nullable=True)
     
     def to_dict(self):
@@ -13,7 +13,7 @@ class AcademicCalendar(db.Model):
     
 class ImportantFiles(db.Model):
     __tablename__ = "important_files"
-    grade = db.Column(db.String, primary_key=True, unique=True, nullable=False)
+    grade = db.Column(db.String(16), primary_key=True, unique=True, nullable=False)
     url = db.Column(db.String(255), nullable=True)
     
     def to_dict(self):
@@ -22,7 +22,7 @@ class ImportantFiles(db.Model):
     
 class StaffList(db.Model):
     __tablename__ = "staff_list"
-    grade = db.Column(db.String, primary_key=True, unique=True, nullable=False)
+    grade = db.Column(db.String(16), primary_key=True, unique=True, nullable=False)
     url = db.Column(db.String(255), nullable=True)
     
     def to_dict(self):
@@ -31,7 +31,7 @@ class StaffList(db.Model):
 
 class TermOverview(db.Model):
     __tablename__ = "term_overview"
-    grade = db.Column(db.String, primary_key=True, unique=True, nullable=False)
+    grade = db.Column(db.String(16), primary_key=True, unique=True, nullable=False)
     url = db.Column(db.String(255), nullable=True)
     
     def to_dict(self):
@@ -40,7 +40,7 @@ class TermOverview(db.Model):
 
 class Timetable(db.Model):
     __tablename__ = "timetable"
-    grade = db.Column(db.String, primary_key=True, unique=True, nullable=False)
+    grade = db.Column(db.String(16), primary_key=True, unique=True, nullable=False)
     url = db.Column(db.String(255), nullable=True)
     
     def to_dict(self):

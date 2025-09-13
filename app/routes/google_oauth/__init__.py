@@ -50,11 +50,22 @@ def require_oauth(admin_only=False):
                     session['name'] = {'name': name}
                     session['user'] = {'email': email}
                     session['picture'] = {'picture': picture}
+                    
+                    # Determine whether user has admin rights
+                    is_admin = True
+                    email_whitelist = "internship1@cpi.ipeka.sch.id"
+                    if Employee.query.filter_by(email=email).one_or_none() is None and email not in email_whitelist:
+                        is_admin = False
+                    session['is_admin'] = is_admin
+                    
+                    # Store in session (cont.)
                     session.modified = True
                     
-                    email_whitelist = "internship1@cpi.ipeka.sch.id"
-                    if admin_only and Employee.query.filter_by(email=email).one_or_none() is None and email not in email_whitelist:
+                    # Restrict access if user doesn't have admin rights
+                    if admin_only and not is_admin:
                         return render_template("oauth/admin_required.html", email=email, b1=str(admin_only), b2=str(Employee.query.filter_by(email=email).one_or_none() is None), b3=str(email != email_whitelist))
+                    
+                    # Return the appropriate response otherwise
                     return f(*args, **kwargs)
 
             except Exception as e:
