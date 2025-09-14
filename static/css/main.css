@@ -313,6 +313,11 @@ main {
   gap: .25rem;
 }
 
+.info__link {
+  font-size: 1.3rem;
+  color: var(--clr-primary-blue);
+}
+
 @media only screen and (min-width: 600px) {
   .info {
     padding: 4rem 2rem 5rem 2rem;
@@ -402,7 +407,7 @@ main {
   grid-area: save;
 }
 
-.button-cancel {
+.button-open {
   background-color: var(--clr-secondary-gray);
   grid-area: cancel;
 }

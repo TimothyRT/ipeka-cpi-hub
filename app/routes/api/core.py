@@ -57,7 +57,6 @@ def get_drive_url(cat: None | str, grade: None | str):
 @core_api_bp.route("/drive", methods=["POST"], strict_slashes=False)
 def edit_drive_url():
     data = request.get_json()
-    print(f"{data = }")
     cat = data.get('cat').lower()
     grade = data.get('grade').upper()
     value = data.get('value')

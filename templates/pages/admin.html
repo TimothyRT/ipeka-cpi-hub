@@ -15,36 +15,39 @@ Admin Panel
 <section class="info">
   <h2 class="info__heading">Site Content</h2>
   <section class="info__subcontainer">
+    <p class="info__subheading">Main folder: <br><a class="info__link" href="https://drive.google.com/drive/folders/1xeOegCzFdulbw5Su1fnjieigQUo24N9h?usp=drive_link" target="_blank">https://drive.google.com/drive/folders/1xeOegCzFdulbw5Su1fnjieigQUo24N9h?usp=sharing</a></p>
+  </section>
+  <section class="info__subcontainer">
     <h3 class="info__subheading">I. Important Files</h3>
-    <form class="text-edit">
+    <!-- <form class="text-edit">
       <h4 class="text-edit__title">General:</h4>
       <input class="text-edit__input text-edit__input-drive" name="files_general" placeholder="Drive folder URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="important-files" data-grade="all" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
-    </form>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
+    </form> -->
     <form class="text-edit">
       <h4 class="text-edit__title">Kindergarten:</h4>
       <input class="text-edit__input text-edit__input-drive" name="files_kg" placeholder="Drive folder URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="important-files" data-grade="kg" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
     <form class="text-edit">
       <h4 class="text-edit__title">Elementary:</h4>
       <input class="text-edit__input text-edit__input-drive" name="files_el" placeholder="Drive folder URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="important-files" data-grade="el" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
     <form class="text-edit">
       <h4 class="text-edit__title">Junior High:</h4>
       <input class="text-edit__input text-edit__input-drive" name="files_jh" placeholder="Drive folder URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="important-files" data-grade="jh" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
     <form class="text-edit">
       <h4 class="text-edit__title">Senior High:</h4>
       <input class="text-edit__input text-edit__input-drive" name="files_sh" placeholder="Drive folder URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="important-files" data-grade="sh" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
   </section>
 
@@ -54,25 +57,25 @@ Admin Panel
       <h4 class="text-edit__title">Kindergarten:</h4>
       <input class="text-edit__input text-edit__input-drive" name="calendar_kg" placeholder="Drive file URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="calendar" data-grade="kg" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
     <form class="text-edit">
       <h4 class="text-edit__title">Elementary:</h4>
       <input class="text-edit__input text-edit__input-drive" name="calendar_el" placeholder="Drive file URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="calendar" data-grade="el" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
     <form class="text-edit">
       <h4 class="text-edit__title">Junior High:</h4>
       <input class="text-edit__input text-edit__input-drive" name="calendar_jh" placeholder="Drive file URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="calendar" data-grade="jh" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
     <form class="text-edit">
       <h4 class="text-edit__title">Senior High:</h4>
       <input class="text-edit__input text-edit__input-drive" name="calendar_sh" placeholder="Drive file URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="calendar" data-grade="sh" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
   </section>
 
@@ -82,25 +85,25 @@ Admin Panel
       <h4 class="text-edit__title">Kindergarten:</h4>
       <input class="text-edit__input text-edit__input-drive" name="overview_kg" placeholder="Drive file URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="term-overview" data-grade="kg" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
     <form class="text-edit">
       <h4 class="text-edit__title">Elementary:</h4>
       <input class="text-edit__input text-edit__input-drive" name="overview_el" placeholder="Drive file URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="term-overview" data-grade="el" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
     <form class="text-edit">
       <h4 class="text-edit__title">Junior High:</h4>
       <input class="text-edit__input text-edit__input-drive" name="overview_jh" placeholder="Drive file URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="term-overview" data-grade="jh" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
     <form class="text-edit">
       <h4 class="text-edit__title">Senior High:</h4>
       <input class="text-edit__input text-edit__input-drive" name="overview_sh" placeholder="Drive file URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="term-overview" data-grade="sh" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
   </section>
 
@@ -110,25 +113,25 @@ Admin Panel
       <h4 class="text-edit__title">Kindergarten:</h4>
       <input class="text-edit__input text-edit__input-drive" name="timetable_kg" placeholder="Drive file URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="timetable" data-grade="kg" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
     <form class="text-edit">
       <h4 class="text-edit__title">Elementary:</h4>
       <input class="text-edit__input text-edit__input-drive" name="timetable_el" placeholder="Drive file URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="timetable" data-grade="el" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
     <form class="text-edit">
       <h4 class="text-edit__title">Junior High:</h4>
       <input class="text-edit__input text-edit__input-drive" name="timetable_jh" placeholder="Drive file URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="timetable" data-grade="jh" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
     <form class="text-edit">
       <h4 class="text-edit__title">Senior High:</h4>
       <input class="text-edit__input text-edit__input-drive" name="timetable_sh" placeholder="Drive file URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="timetable" data-grade="sh" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
   </section>
 
@@ -138,7 +141,7 @@ Admin Panel
       <h4 class="text-edit__title">All:</h4>
       <input class="text-edit__input text-edit__input-drive" name="staff_ro" placeholder="Drive folder URL" onload="load(this);" type="text">
       <button class="button button-save text-edit__button" type="button" data-cat="staff-list" data-grade="all" onclick="saveEdit(this.dataset.cat, this.dataset.grade);">Save edit</button>
-      <button class="button button-cancel text-edit__button" type="button">Reset</button>
+      <button class="button button-open text-edit__button" type="button" onclick="openURL(this);">Open</button>
     </form>
   </section>
 </section>
@@ -169,6 +172,11 @@ Admin Panel
       alert("Edit saved!");
     })
     .catch(error => console.error('Error:', error));
+  }
+
+  const openURL = (buttonOpen) => {
+    const { value: inputValue } = event.target.closest('form').querySelector('input');
+    window.open(inputValue, "_blank");
   }
 
   document.addEventListener("DOMContentLoaded", () => {
